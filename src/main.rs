@@ -1,9 +1,11 @@
 use leptos::prelude::*;
+use rand::RngExt;
 
 #[component]
 fn App() -> impl IntoView {
     let (count, set_count) = signal(0);
     let (number, set_number) = signal(0_i32);
+    let (diceroll, set_diceroll) = signal(0_u8);
 
     view! {
         <main>
@@ -12,6 +14,23 @@ fn App() -> impl IntoView {
                 <p>"Count: " {count}</p>
                 <button on:click=move |_| set_count.update(|current| *current += 1)>
                     "Add one"
+                </button>
+                <button on:click=move |_| set_count.update(|current| *current -= 1)>
+                    "Subtract one"
+                </button>
+                <button on:click=move |_| set_count.update(|current| *current = 0)>
+                   "Reset"
+                </button>
+                <button on:click=move |_| set_count.update(|current| *current *= -1)>
+                    "Multiply by -1"
+                </button>
+                <button on:click=move |_| set_count.update(|current| *current *= *current)>
+                   "Square"
+                </button>
+            </section>
+            <section>
+                <button on:click=move |_| set_diceroll.set(rand::rng().random_range(1..=6))>
+                   "Roll a Die " {diceroll}
                 </button>
             </section>
             <section>
