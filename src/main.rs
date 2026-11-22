@@ -6,6 +6,7 @@ fn App() -> impl IntoView {
     let (count, set_count) = signal(0);
     let (number, set_number) = signal(0_i32);
     let (diceroll, set_diceroll) = signal(0_u8);
+    let (logs, set_logs) = signal(String::new());
 
     view! {
         <main>
@@ -29,9 +30,16 @@ fn App() -> impl IntoView {
                 </button>
             </section>
             <section>
-                <button on:click=move |_| set_diceroll.set(rand::rng().random_range(1..=6))>
+                <button on:click=move |_| {
+                    let roll = rand::rng().random_range(1..=6);
+                    set_diceroll.set(roll);
+                    set_logs.update(|logs|logs.push_str(format!("\n{roll}").as_str()));
+                }>
                    "Roll a Die " {diceroll}
                 </button>
+            </section>
+            <section>
+                <textarea readonly rows="8" cols="40" prop:value=move || logs.get()></textarea>
             </section>
             <section>
                 <label>
