@@ -2994,7 +2994,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "sr5e-grunt-check"
+name = "sr5e-dashboard"
 version = "0.1.0"
 dependencies = [
  "eframe",

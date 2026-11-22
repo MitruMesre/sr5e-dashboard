@@ -1,5 +1,5 @@
 [package]
-name = "sr5e-grunt-check"
+name = "sr5e-dashboard"
 version = "0.1.0"
 edition = "2024"
 
